@@ -15,9 +15,3 @@ CREATE TABLE Car(
 	company_id VARCHAR(4) foreign key (company_id) REFERENCES Company(company_id)
 ):
 
-//inserts the record : 
-INSERT INTO Company(company_id , company_name , turnover_in_crores , registration_date) VALUES
-('CM01','Suzuki',7542,'1973-01-01')
-('CM02','Hyundai',6542,'1994-01-01')
-('CM03','Skoda',2542,'2004-01-01')
-('CM04','Volkswagen',4956,'2005-01-01');
