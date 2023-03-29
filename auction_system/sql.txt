@@ -1,0 +1,165 @@
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    role VARCHAR(10) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE items (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(100) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(10) NOT NULL,
+    seller_id INT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (seller_id) REFERENCES users(id)
+);
+
+CREATE TABLE transactions (
+    id INT NOT NULL AUTO_INCREMENT,
+    buyer_id INT NOT NULL,
+    seller_id INT NOT NULL,
+    item_id INT NOT NULL,
+    date DATETIME NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (buyer_id) REFERENCES users(id),
+    FOREIGN KEY (seller_id) REFERENCES users(id),
+    FOREIGN KEY (item_id) REFERENCES items(id)
+);
+
+INSERT INTO users (username, password, email, address, role) 
+VALUES ('admin', 'admin', 'admin@example.com', '123 Main St, Anytown, USA', 'admin');
+
+INSERT INTO users (username, password, email, address, role) 
+VALUES ('buyer1', 'password1', 'buyer1@example.com', '456 Elm St, Anytown, USA', 'user');
+
+INSERT INTO users (username, password, email, address, role) 
+VALUES ('seller1', 'password1', 'seller1@example.com', '789 Oak St, Anytown, USA', 'user');
+
+INSERT INTO items (name, description, category, price, status, seller_id) 
+VALUES ('Item 1', 'Description for Item 1', 'Category 1', 10.00, 'for_sale', 2);
+
+INSERT INTO items (name, description, category, price, status, seller_id) 
+VALUES ('Item 2', 'Description for Item 2', 'Category 2', 20.00, 'sold', 2);
+
+INSERT INTO transactions (buyer_id, seller_id, item_id, date, amount) 
+VALUES (1, 2, 1, '2023-03-28 10:00:00', 10.00);
+
+INSERT INTO transactions (buyer_id, seller_id, item_id, date, amount) 
+VALUES (1, 2, 2, '2023-03-28 11:00:00', 20.00);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE user_table (
+	id INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50) NOT NULL,
+	first_name VARCHAR(50) NOT NULL,
+	last_name VARCHAR(50) NOT NULL,)
+	address VARCHAR(100) NOT NULL,
+	mobile_no VARCHAR(10) NOT NULL,
+	password VARCHAR(50) NOT NULL
+);
+CREATE product_table(
+
+	id INT NOT NULL AUTO_INCREMENT,
+	name  VARCHAR(50) NOT NULL,
+	price FLOAT NOT NULL,
+	quantity INT NOT NULL AUTO_INCREMENT,
+	description  VARCHAR(100) NOT NULL,
+	sold_status INT NOT NULL AUTO_INCREMENT,
+	category  VARCHAR(50) NOT NULL
+);
+CREATE transaction_table(
+
+	id INT NOT NULL AUTO_INCREMENT,
+	buyer_id INT NOT NULL AUTO_INCREMENT  referencing user_table,
+	seller_id INT NOT NULL AUTO_INCREMENT  referencing user_table,
+	product_id INT NOT NULL AUTO_INCREMENT referencing product_table,
+	date DATE NOT NULL,
+	amount FLOAT NOT NULL,
+	transaction_type VARCHAR(50) NOT NULL
+);
+
+Note: The transaction_type column in transaction_table can have the following values: 'purchase', 'sale', or 'return'
+
+
+The SQL queries for the different functionalities are:
+
+User registration:
+
+INSERT INTO user_table (username, first_name, last_name, address, mobile_no, password)
+VALUES ('username', 'first_name', 'last_name', 'address', 'mobile_no', 'password');
+User login:
+
+SELECT * FROM user_table WHERE username='username' AND password='password';
+Update personal details:
+
+UPDATE user_table SET first_name='new_first_name', last_name='new_last_name', address='new_address', 
+mobile_no='new_mobile_no' WHERE id=1;
+Change password:
+
+UPDATE user_table SET password='new_password' WHERE id=1;
+Add a product for sale:
+
+INSERT INTO product_table (name, price, quantity, description, sold_status, category)
+VALUES ('product_name', 100.00, 10, 'product_description', 0, 'category');
+Update product details:
+
+UPDATE product_table SET name='new_product_name', price=150.00, quantity=5, description='new_description',
+sold_status=1, category='new_category' WHERE id=1;
+See all available products for sale:
+
+SELECT * FROM product_table WHERE sold_status=0;
+Purchase an item:
+
+INSERT INTO transaction_table (buyer_id, seller_id, product_id, date, amount, transaction_type)
+VALUES (1, 2, 1, '2023-03-28', 100.00, 'purchase');
+Return a purchased item:
+
+INSERT INTO transaction_table (buyer_id, seller_id, product_id, date, amount, transaction_type)
+VALUES (1, 2, 1, '2023-03-30', 100.00, 'return');
+See transaction history of purchased items:
+
+SELECT * FROM transaction_table WHERE buyer_id=1 AND transaction_type='purchase';
+See transaction history of sold items:
+
+SELECT * FROM transaction_table WHERE seller_id=1 AND transaction_type='sale';
+See transaction history of returned items:
+
+SELECT * FROM transaction_table WHERE buyer_id=1 AND transaction_type='return';
+User logout:
+This is handled by the application and does not require a SQL query.
+Delete user account:
+
+DELETE FROM user_table WHERE id=1;
+
+
+
+
+
+
+
+
