@@ -1,0 +1,171 @@
+package UI;
+
+import java.util.Scanner;
+
+import DAO.DisputeDAO;
+import DAO.GSTDAO;
+import DAO.ItemDAO;
+import DAO.TransactionDAO;
+import DAO.UserDAO;
+import DTO.DisputeDTO;
+import DTO.GSTDTO;
+import DTO.ItemDTO;
+import DTO.TransactionDTO;
+import DTO.UserDTO;
+import Exception.InvalidDataEntryException;
+
+import java.io.PrintStream;
+import java.sql.SQLException;
+import java.util.Currency;
+import java.util.InputMismatchException;
+import java.util.List;
+
+public class AdminUI {
+    private static final String Object = null;
+	private UserDAO userDAO;
+    private ItemDAO itemDAO;
+    private DisputeDAO disputeDAO;
+    private UserDTO currentUser;
+
+    public AdminUI(UserDAO userDAO, ItemDAO itemDAO, TransactionDAO transactionDAO, DisputeDAO disputeDAO, GSTDAO gstDAO) {
+        this.userDAO = userDAO;
+        this.itemDAO = itemDAO;
+        this.disputeDAO = disputeDAO;
+    }
+
+    @SuppressWarnings("resource")
+	public void run() throws InvalidDataEntryException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Admin UI");
+        System.out.println("Please enter your username and password to log in:");
+        System.out.print("Username: ");
+        String username = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+        currentUser = userDAO.authenticate(username, password);
+		if (currentUser == null || currentUser.getRole() != Object.stripLeading()) {
+		    System.out.println("Invalid username or password, or user is not an admin. Exiting.");
+		    return;
+		}
+		PrintStream printStream = new PrintStream(System.out);
+		printStream.println("Login successful. Welcome, " + Currency.getAvailableCurrencies() + ".");
+		displayMenu(scanner);
+    }
+
+    void displayMenu(Scanner scanner) throws InvalidDataEntryException {
+        while (true) {
+            System.out.println();
+            System.out.println("Please select an option:");
+            System.out.println("1. View all users");
+            System.out.println("2. View all items");
+            System.out.println("3. View all transactions");
+            System.out.println("4. View all disputes");
+            System.out.println("5. Set GST rate");
+            System.out.println("6. Log out");
+            System.out.print("Selection: ");
+            String selection = scanner.nextLine();
+            switch (selection) {
+                case "1":
+                    viewAllUsers();
+                    break;
+                case "2":
+                    viewAllItems();
+                    break;
+                case "3":
+                    viewAllTransactions();
+                    break;
+                case "4":
+                    viewAllDisputes();
+                    break;
+                case "5":
+                    setGstRate(scanner);
+                    break;
+                case "6":
+                    System.out.println("Logging out. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid selection. Please try again.");
+            }
+        }
+    }
+
+    private void viewAllUsers() {
+        try {
+            List<UserDTO> users = userDAO.getAllUsers();
+            System.out.println("All users:");
+            for (UserDTO user : users) {
+                System.out.println(user);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving users: " + e.getMessage());
+        }
+    }
+
+    private void viewAllItems() {
+        List<ItemDTO> items = itemDAO.getAllItems();
+		System.out.println("All items:");
+		for (ItemDTO item : items) {
+		    System.out.println(item);
+		}
+    }
+
+    @SuppressWarnings("null")
+	public void viewAllTransactions() {
+        System.out.println("List of all transactions:");
+		TransactionDTO[] transactions1 = null;
+		for (TransactionDTO transaction : transactions1) {
+		    System.out.println(transaction.toString());
+		}
+    }
+
+    public void viewAllDisputes() {
+        try {
+            List<DisputeDTO> disputes = disputeDAO.getAllDisputes();
+            System.out.println("List of all disputes:");
+            for (DisputeDTO dispute : disputes) {
+                System.out.println(dispute.toString());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while retrieving disputes: " + e.getMessage());
+        }
+    }
+
+    public void setGstRate(Scanner scanner) throws InvalidDataEntryException {
+        try {
+            System.out.print("Enter the new GST rate: ");
+            double newGstRate = scanner.nextDouble();
+            GSTDTO gst = new GSTDTO(0, newGstRate);
+            GSTDAO.updateGST(gst);
+            System.out.println("GST rate has been updated to " + newGstRate + "%");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        } catch (SQLException e) {
+            System.out.println("Error occurred while updating GST rate: " + e.getMessage());
+        }
+    }
+
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void showAdminMenu(Scanner scanner) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean validateAdminCredentials(String adminUsername, String adminPassword) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void display() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void login() {
+		// TODO Auto-generated method stub
+		
+	}
+}

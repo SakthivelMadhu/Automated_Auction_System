@@ -1,0 +1,153 @@
+package com.masai.DAO;
+
+import java.util.List;
+import com.masai.DTO.TransactionDTO;
+import com.masai.Exception.AuctionException;
+
+
+//public interface TransactionDAO {
+//    
+//    List<TransactionDTO> getAllTransactions() throws AuctionException;
+//    
+//    TransactionDTO getTransactionById(int id) throws AuctionException;
+//    
+//    List<TransactionDTO> getTransactionsByDateRange(Date startDate, Date endDate) throws AuctionException;
+//    
+//    TransactionDTO addTransaction(TransactionDTO transaction) throws AuctionException;
+//    
+//    void updateTransaction(TransactionDTO transaction) throws AuctionException;
+//
+//	List<TransactionDTO> getTransactionsByBuyer(int id);
+//
+//	List<TransactionDTO> getTransactionsBySeller(int id);
+//    
+//}
+
+import java.sql.*;
+import java.util.ArrayList;
+
+public abstract class TransactionDAO {
+    
+    private Connection connection;
+
+    public TransactionDAO(Connection connection) {
+        this.connection = connection;
+    }
+
+    public List<TransactionDTO> getAllTransactions() throws AuctionException {
+        List<TransactionDTO> transactions = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                TransactionDTO transaction = new TransactionDTO(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("buyer"),
+                        resultSet.getInt("seller"),
+                        resultSet.getInt("item"),
+                        resultSet.getTimestamp("date"),
+                        resultSet.getDouble("amount")
+                );
+                transactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            throw new AuctionException("Error getting all transactions", e);
+        }
+        return transactions;
+    }
+
+    public TransactionDTO getTransactionById(int id) throws AuctionException {
+        TransactionDTO transaction = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                transaction = new TransactionDTO(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("buyer"),
+                        resultSet.getInt("seller"),
+                        resultSet.getInt("item"),
+                        resultSet.getTimestamp("date"),
+                        resultSet.getDouble("amount")
+                );
+            }
+        } catch (SQLException e) {
+            throw new AuctionException("Error getting transaction by id: " + id, e);
+        }
+        return transaction;
+    }
+
+    public List<TransactionDTO> getTransactionsByDateRange(Timestamp startDate, Timestamp endDate) throws AuctionException {
+        List<TransactionDTO> transactions = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions WHERE date BETWEEN ? AND ?");
+            statement.setTimestamp(1, startDate);
+            statement.setTimestamp(2, endDate);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                TransactionDTO transaction = new TransactionDTO(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("buyer"),
+                        resultSet.getInt("seller"),
+                        resultSet.getInt("item"),
+                        resultSet.getTimestamp("date"),
+                        resultSet.getDouble("amount")
+                );
+                transactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            throw new AuctionException("Error getting transactions by date range: " + startDate + " - " + endDate, e);
+        }
+        return transactions;
+    }
+
+    public void addTransaction(TransactionDTO transaction) throws AuctionException {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO transactions (buyer, seller, item, date, amount) VALUES (?, ?, ?, ?, ?)");
+            statement.setInt(1, transaction.getBuyer());
+            statement.setInt(2, transaction.getSeller());
+            statement.setInt(3, transaction.getItem());
+            statement.setTimestamp(4, transaction.getDate());
+            statement.setDouble(5, transaction.getAmount());
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted == 0) {
+                throw new AuctionException("Error adding transaction");
+            }
+        } catch (SQLException e) {
+            throw new AuctionException("Error adding transaction", e);
+        }
+    }
+
+    public void updateTransaction(TransactionDTO transaction) throws AuctionException {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE transactions SET buyer = ?, seller = ?, item = ?, date = ?, amount = ? WHERE id = ?");
+            statement.setInt(1, transaction.getBuyer());
+            statement.setInt(2, transaction.getSeller());
+            statement.setInt(3, transaction.getItem());
+            statement.setTimestamp(4, transaction.getDate());
+            statement.setDouble(5, transaction.getAmount());
+            statement.setInt(6, transaction.getId());
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated == 0) {
+                throw new AuctionException("Error adding transaction");
+            }
+        } catch (SQLException e) {
+            throw new AuctionException("Error adding transaction", e);
+        }
+    }
+
+	public TransactionDTO[] getTransactionsByBuyer(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public TransactionDTO[] getTransactionsBySeller(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}
+           
+

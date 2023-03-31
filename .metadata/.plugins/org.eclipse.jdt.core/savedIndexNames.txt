@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\sakth\OneDrive\Desktop\Myproject\JAVA Project\brief-shirt-7318\.metadata\.plugins\org.eclipse.jdt.core
+3188974394.index
+1865797976.index
+2107553925.index

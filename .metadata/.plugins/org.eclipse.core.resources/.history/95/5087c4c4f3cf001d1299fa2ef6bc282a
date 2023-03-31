@@ -1,0 +1,26 @@
+package com.masai.DAO;
+
+
+
+import java.sql.SQLException;
+import java.util.List;
+
+import DTO.GSTDTO;
+import Exception.InvalidDataEntryException;
+
+public interface GSTDAO {
+    public GSTDTO getGSTByCategory(String category) throws SQLException;
+    public void addGST(GSTDTO gst) throws SQLException;
+    public static void updateGST(GSTDTO gst) throws SQLException, InvalidDataEntryException {
+		// TODO Auto-generated method stub
+		
+	}
+    public void deleteGST(String category) throws SQLException;
+    public List<GSTDTO> getAllGST() throws SQLException;
+    GSTDAO gstDAO = new GSTDAOImpl(null) {
+    	
+    };
+	
+
+}
+

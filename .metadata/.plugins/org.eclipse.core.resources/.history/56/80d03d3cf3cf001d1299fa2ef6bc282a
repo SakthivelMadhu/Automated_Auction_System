@@ -1,0 +1,143 @@
+package com.masai.DAO;
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import DTO.DisputeDTO;
+import Exception.InvalidDataEntryException;
+
+public abstract class DisputeDAOImpl implements DisputeDAO {
+    private Connection conn;
+    
+    public DisputeDAOImpl(Connection conn) {
+        this.conn = conn;
+    }
+
+    public DisputeDAOImpl(String dbUrl, String dbUsername, String dbPassword) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+    public void addDispute(DisputeDTO dispute) throws SQLException {
+        String query = "INSERT INTO disputes (transaction_id, description) VALUES (?, ?)";
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, dispute.getTransactionId());
+            stmt.setString(2, dispute.getDescription());
+
+            int count = stmt.executeUpdate();
+            if (count != 1) {
+                throw new SQLException("Failed to add dispute");
+            }
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+
+    @Override
+    public void updateDispute(DisputeDTO dispute) throws SQLException, InvalidDataEntryException {
+        String query = "UPDATE disputes SET description = ? WHERE dispute_id = ?";
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, dispute.getDescription());
+            stmt.setInt(2, dispute.getDisputeId());
+
+            int count = stmt.executeUpdate();
+            if (count != 1) {
+                throw new InvalidDataEntryException("Failed to update dispute");
+            }
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+
+    @Override
+    public void deleteDispute(int disputeId) throws SQLException {
+        String query = "DELETE FROM disputes WHERE dispute_id = ?";
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, disputeId);
+
+            int count = stmt.executeUpdate();
+            if (count != 1) {
+                throw new SQLException("Failed to delete dispute");
+            }
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+
+    @Override
+    public DisputeDTO getDisputeById(int disputeId) throws SQLException {
+        String query = "SELECT * FROM disputes WHERE dispute_id = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, disputeId);
+
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new DisputeDTO(
+                    rs.getInt("dispute_id"),
+                    rs.getInt("transaction_id"),
+                    disputeId, disputeId, rs.getString("description"), null
+                );
+            } else {
+                return null;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+
+    @Override
+    public List<DisputeDTO> getAllDisputes() throws SQLException {
+        List<DisputeDTO> disputes = new ArrayList<>();
+        String query = "SELECT * FROM disputes";
+        String databaseURL = null;
+		String username = null;
+		String password = null;
+		try (Connection conn = DriverManager.getConnection(databaseURL, username, password);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int disputeId = rs.getInt("dispute_id");
+                int transactionId = rs.getInt("transaction_id");
+                String description = rs.getString("description");
+                Timestamp dateCreated = rs.getTimestamp("date_created");
+                disputes.add(new DisputeDTO(disputeId, transactionId, description, dateCreated));
+            }
+        }
+        return disputes;
+    }
+}
+
+       
+

@@ -1,0 +1,125 @@
+package com.masai.DAO;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import DTO.TransactionDTO;
+
+public abstract class TransactionDAOImpl implements TransactionDAO {
+    private Connection connection;
+
+    public TransactionDAOImpl(Connection connection) {
+        this.connection = connection;
+    }
+
+    @Override
+    public void addTransaction(TransactionDTO transaction) throws SQLException {
+        String query = "INSERT INTO transactions (item_id, seller_id, buyer_id, transaction_date, amount) "
+                + "VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, transaction.getItemId());
+        statement.setInt(2, transaction.getSellerId());
+        statement.setInt(3, transaction.getBuyerId());
+        statement.setTimestamp(4, Timestamp.valueOf(transaction.getTransactionDate()));
+        statement.setDouble(5, transaction.getAmount());
+        statement.executeUpdate();
+    }
+
+    @Override
+    public void updateTransaction(TransactionDTO transaction) throws SQLException {
+        String query = "UPDATE transactions SET item_id=?, seller_id=?, buyer_id=?, transaction_date=?, amount=? "
+                + "WHERE transaction_id=?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, transaction.getItemId());
+        statement.setInt(2, transaction.getSellerId());
+        statement.setInt(3, transaction.getBuyerId());
+        statement.setTimestamp(4, Timestamp.valueOf(transaction.getTransactionDate()));
+        statement.setDouble(5, transaction.getAmount());
+        statement.setInt(6, transaction.getTransactionId());
+        statement.executeUpdate();
+    }
+
+    @Override
+    public void deleteTransaction(int transactionId) throws SQLException {
+        String query = "DELETE FROM transactions WHERE transaction_id=?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, transactionId);
+        statement.executeUpdate();
+    }
+
+    @Override
+    public TransactionDTO getTransactionById(int transactionId) throws SQLException {
+        String query = "SELECT * FROM transactions WHERE transaction_id=?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, transactionId);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            TransactionDTO transaction = new TransactionDTO(transactionId, transactionId, transactionId, transactionId, null, transactionId);
+            transaction.setTransactionId(resultSet.getInt("transaction_id"));
+            transaction.setItemId(resultSet.getInt("item_id"));
+            transaction.setSellerId(resultSet.getInt("seller_id"));
+            transaction.setBuyerId(resultSet.getInt("buyer_id"));
+            transaction.setTransactionDate(resultSet.getTimestamp("transaction_date").toLocalDateTime());
+            transaction.setAmount(resultSet.getDouble("amount"));
+            return transaction;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<TransactionDTO> getTransactionsByBuyerId(int buyerId) throws SQLException {
+        String query = "SELECT * FROM transactions WHERE buyer_id = ?";
+        List<TransactionDTO> transactions = new ArrayList<>();
+        Statement dataSource = null;
+		try (@SuppressWarnings("null")
+		Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, buyerId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    TransactionDTO transaction = new TransactionDTO(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("item_id"),
+                            resultSet.getInt("seller_id"),
+                            resultSet.getInt("buyer_id"),
+                            resultSet.getTimestamp("timestamp"));
+                    transactions.add(transaction);
+                }
+            }
+        }
+        return transactions;
+    }
+
+    @Override
+    public List<TransactionDTO> getTransactionsBySellerId(int sellerId) throws SQLException {
+        String query = "SELECT * FROM transactions WHERE seller_id = ?";
+        List<TransactionDTO> transactions = new ArrayList<>();
+        Statement dataSource = null;
+        try (@SuppressWarnings("null")
+		Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, sellerId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    TransactionDTO transaction = new TransactionDTO(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("item_id"),
+                            resultSet.getInt("seller_id"),
+                            resultSet.getInt("buyer_id"),
+                            resultSet.getTimestamp("timestamp"));
+                    transactions.add(transaction);
+                }
+            }
+        }
+        return transactions;
+    }
+}
+
