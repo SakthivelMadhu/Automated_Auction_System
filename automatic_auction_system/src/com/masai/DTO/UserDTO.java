@@ -1,68 +1,73 @@
 package com.masai.DTO;
 
 public class UserDTO {
-    private int id;
+    private int userId;
     private String username;
     private String password;
     private String email;
-    private String address;
-    private String role;
-    
-    public UserDTO(int id, String username, String password, String email, String address, String role) {
-        this.id = id;
+
+    public UserDTO(int userId, String username, String password, String email) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.address = address;
-        this.role = role;
     }
-    
-    public int getId() {
-        return id;
+
+    public UserDTO(String fullName, String username2, String password2, String email2, String phoneNumber,
+			int codePointCount) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getUserId() {
+        return userId;
     }
-    
-    public void setId(int id) {
-        this.id = id;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
-    
+
     public String getUsername() {
         return username;
     }
-    
+
     public void setUsername(String username) {
         this.username = username;
     }
-    
+
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public String getAddress() {
-        return address;
-    }
-    
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    
-    public String getRole() {
-        return role;
-    }
-    
-    public void setRole(String role) {
-        this.role = role;
-    }
+
+	public Object getRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setFullName(String fullName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getFullName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 

@@ -1,76 +1,91 @@
 package com.masai.DTO;
 
-import java.sql.Timestamp;
 
-//import java.sql.Timestamp;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class TransactionDTO {
-    private int id;
-    private int buyer;
-    private int seller;
-    private int item;
-    private Timestamp date;
-    private double amount;
-    
-    public TransactionDTO(int id, int buyer, int seller, int item, Timestamp date, double amount) {
-        this.id = id;
-        this.buyer = buyer;
-        this.seller = seller;
-        this.item = item;
-        this.date = date;
-        this.amount = amount;
+    private int transactionId;
+    private int itemId;
+    private int sellerId;
+    private int buyerId;
+    private String transactionDate;
+    private double transactionAmount;
+
+    public TransactionDTO(int transactionId, int itemId, int sellerId, int buyerId, String transactionDate, double transactionAmount) {
+        this.transactionId = transactionId;
+        this.itemId = itemId;
+        this.sellerId = sellerId;
+        this.buyerId = buyerId;
+        this.transactionDate = transactionDate;
+        this.transactionAmount = transactionAmount;
     }
-    
-    public void TransactionDTO1(int int1, int int2, int int3, int int4, Timestamp timestamp, double double1) {
+
+    public TransactionDTO(int int1, int int2, int int3, int int4, Timestamp timestamp) {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
-        return id;
+	public int getTransactionId() {
+        return transactionId;
     }
-    
-    public void setId(int id) {
-        this.id = id;
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
-    
-    public int getBuyer() {
-        return buyer;
+
+    public int getItemId() {
+        return itemId;
     }
-    
-    public void setBuyer(int buyer) {
-        this.buyer = buyer;
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
-    
-    public int getSeller() {
-        return seller;
+
+    public int getSellerId() {
+        return sellerId;
     }
-    
-    public void setSeller(int seller) {
-        this.seller = seller;
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
-    
-    public int getItem() {
-        return item;
+
+    public int getBuyerId() {
+        return buyerId;
     }
-    
-    public void setItem(int item) {
-        this.item = item;
+
+    public void setBuyerId(int buyerId) {
+        this.buyerId = buyerId;
     }
-    
-    public Timestamp getDate() {
-        return date;
+
+    public String getTransactionDate() {
+        return transactionDate;
     }
-    
-    public void setDate(Timestamp date) {
-        this.date = date;
+
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
-    
-    public double getAmount() {
-        return amount;
+
+    public double getTransactionAmount() {
+        return transactionAmount;
     }
-    
-    public void setAmount(double amount) {
-        this.amount = amount;
+
+    public void setTransactionAmount(double transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
+
+	public void setAmount(double double1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTransactionDate(LocalDateTime localDateTime) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public double getAmount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 

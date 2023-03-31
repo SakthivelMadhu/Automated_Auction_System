@@ -1,0 +1,244 @@
+package com.masai.DAO;
+
+
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.masai.DTO.ItemDTO;
+import com.masai.Exception.InvalidDataEntryException;
+
+public abstract class ItemDAOImpl implements ItemDAO {
+    private static final Statement DBConnection = null;
+	private Connection connection;
+    private PreparedStatement preparedStatement;
+    private ResultSet resultSet;
+
+    public ItemDAOImpl(Object object) throws SQLException {
+        connection = DBConnection.getConnection();
+    }
+
+    public boolean addItem(ItemDTO itemDTO) throws InvalidDataEntryException {
+        try {
+            preparedStatement = connection.prepareStatement("INSERT INTO items (name, price, quantity, description, sold_status, category, seller_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, itemDTO.getName());
+            preparedStatement.setDouble(2, itemDTO.getPrice());
+            preparedStatement.setInt(3, itemDTO.getQuantity());
+            preparedStatement.setString(4, itemDTO.getDescription());
+            preparedStatement.setInt(5, itemDTO.getSoldStatus());
+            preparedStatement.setString(6, itemDTO.getCategory());
+            preparedStatement.setInt(7, itemDTO.getSellerId());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 1062) { // Error code for duplicate entry
+                throw new InvalidDataEntryException("Item ID already exists");
+            } else {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateItem(ItemDTO itemDTO) throws InvalidDataEntryException {
+        try {
+            preparedStatement = connection.prepareStatement("UPDATE items SET name=?, price=?, quantity=?, description=?, sold_status=?, category=?, seller_id=? WHERE item_id=?");
+            preparedStatement.setString(1, itemDTO.getName());
+            preparedStatement.setDouble(2, itemDTO.getPrice());
+            preparedStatement.setInt(3, itemDTO.getQuantity());
+            preparedStatement.setString(4, itemDTO.getDescription());
+            preparedStatement.setInt(5, itemDTO.getSoldStatus());
+            preparedStatement.setString(6, itemDTO.getCategory());
+            preparedStatement.setInt(7, itemDTO.getSellerId());
+            preparedStatement.setInt(8, itemDTO.getItemId());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 1062) { // Error code for duplicate entry
+                throw new InvalidDataEntryException("Item ID already exists");
+            } else {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteItem(int itemId) {
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM items WHERE item_id=?");
+            preparedStatement.setInt(1, itemId);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public List<ItemDTO> getItemsByCategory(String category) throws SQLException {
+        String query = "SELECT * FROM items WHERE category = ? AND sold_status = 0 AND is_deleted = 0";
+        List<ItemDTO> items = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, category);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    ItemDTO item = new ItemDTO(
+                            rs.getInt("item_id"),
+                            rs.getString("name"),
+                            rs.getFloat("price"),
+                            rs.getInt("quantity"),
+                            rs.getString("description"),
+                            rs.getInt("sold_status"),
+                            rs.getString("category"),
+                            rs.getInt("seller_id"),
+                            rs.getInt("buyer_id")
+                    );
+                    items.add(item);
+                }
+            }
+        }
+        return items;
+    }
+
+    @Override
+    public List<ItemDTO> getAvailableItems() throws SQLException {
+        String query = "SELECT * FROM items WHERE sold_status = 0 AND is_deleted = 0";
+        List<ItemDTO> items = new ArrayList<>();
+        try (Statement stmt = connection.createStatement()) {
+            try (ResultSet rs = stmt.executeQuery(query)) {
+                while (rs.next()) {
+                    ItemDTO item = new ItemDTO(
+                            rs.getInt("item_id"),
+                            rs.getString("name"),
+                            rs.getFloat("price"),
+                            rs.getInt("quantity"),
+                            rs.getString("description"),
+                            rs.getInt("sold_status"),
+                            rs.getString("category"),
+                            rs.getInt("seller_id"),
+                            rs.getInt("buyer_id")
+                    );
+                    items.add(item);
+                }
+            }
+        }
+        return items;
+    }
+
+    @Override
+    public ItemDTO getItemById(int itemId) throws SQLException {
+        String query = "SELECT * FROM items WHERE item_id = ? AND is_deleted = 0";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, itemId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    ItemDTO item = new ItemDTO(
+                            rs.getInt("item_id"),
+                            rs.getString("name"),
+                            rs.getFloat("price"),
+                            rs.getInt("quantity"),
+                            rs.getString("description"),
+                            rs.getInt("sold_status"),
+                            rs.getString("category"),
+                            rs.getInt("seller_id"),
+                            rs.getInt("buyer_id")
+                    );
+                    return item;
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<ItemDTO> getItemsBySellerId(int sellerId) throws SQLException {
+        String query = "SELECT * FROM items WHERE seller_id = ? AND is_deleted = 0";
+        List<ItemDTO> items = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, sellerId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    ItemDTO item = new ItemDTO(
+                            rs.getInt("item_id"),
+                            rs.getString("name"),
+                            rs.getFloat("price"),
+                            rs.getInt("quantity"),
+                            rs.getString("description"),
+                            rs.getInt("sold_status"),
+                            rs.getString("category"),
+                            rs.getInt("seller_id"),
+                            rs.getInt("buyer_id")
+                    );
+                    items.add(item);
+                }
+            }
+        }
+        return items;
+    }
+
+    @Override
+    public List<ItemDTO> getItemsByBuyerId(int buyerId) throws SQLException {
+	    String query ="SELECT * FROM items WHERE buyer_id=? AND is_deleted=0";	
+		List<ItemDTO> items = new ArrayList<>();
+	    try (PreparedStatement statement = connection.prepareStatement(query)){
+	    	statement.setInt(1, buyerId);
+	    	try(ResultSet rs = statement.executeQuery()) {
+	    		while (rs.next()) {
+	                ItemDTO item = new ItemDTO(
+	                        rs.getInt("item_id"),
+	                        rs.getString("name"),
+	                        rs.getFloat("price"),
+	                        rs.getInt("quantity"),
+	                        rs.getString("description"),
+	                        rs.getInt("sold_status"),
+	                        rs.getString("category"),
+	                        rs.getInt("seller_id"),
+	                        rs.getInt("buyer_id")
+	                );
+	                items.add(item);
+	            }
+	    	}  
+	    }   
+	    return items;
+    }
+
+//	@Override
+//	public boolean addItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+
+//	@Override
+//	public boolean updateItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean addItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	@Override
+//	public boolean updateItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+
+	public ResultSet getResultSet() {
+		return resultSet;
+	}
+
+	public void setResultSet(ResultSet resultSet) {
+		this.resultSet = resultSet;
+	}
+}
+                       
+
+
