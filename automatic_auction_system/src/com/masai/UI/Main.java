@@ -78,6 +78,20 @@ public class Main {
 			}
         }		
     }
+    
+    
+    
+    public void showAdminMenu() {
+        System.out.println("Welcome to the Auction System!");
+        System.out.println("Please select an option:");
+        System.out.println("1. Login");
+        System.out.println("2. Register");
+        System.out.println("3. Search items");
+        System.out.println("4. View transactions");
+        System.out.println("5. Logout");
+        System.out.println("6. Exit the application");
+    }
+
     public void login() {
         try (Scanner scanner = new Scanner(System.in)) {
 			System.out.println("Please enter your username:");
