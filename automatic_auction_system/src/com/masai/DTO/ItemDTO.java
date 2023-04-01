@@ -1,27 +1,35 @@
 package com.masai.DTO;
 
-
+//name, price, quantity, description, sold_status, category, seller_id 
 
 public class ItemDTO {
+    
     private int id;
     private String name;
-    private String description;
-    private String category;
-    private int sellerId;
-    private int buyerId;
     private double price;
-    private boolean available;
+    @SuppressWarnings("unused")
+	private int quantity;
+    private String description;
+    private int sold_status;
+    private String category;
+    private int seller_id;
+    
+    
 
-    public ItemDTO(int id, String name, String description, String category, int sellerId, int buyerId, double price, boolean available) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.category = category;
-        this.sellerId = sellerId;
-        this.buyerId = buyerId;
-        this.price = price;
-        this.available = available;
-    }
+    public ItemDTO(int id, String name, double price, int quantity, String description, int sold_status,
+			String category, int seller_id) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.description = description;
+		this.sold_status = sold_status;
+		this.category = category;
+		this.seller_id = seller_id;
+	}
+
+
 
     public ItemDTO(int int1, String string, float float1, int int2, String string2, int int3, String string3, int int4,
 			int int5) {
@@ -29,68 +37,64 @@ public class ItemDTO {
 	}
 
 	public int getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public double getPrice() {
+		return price;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public int getSellerId() {
-        return sellerId;
-    }
+	public int getSold_status() {
+		return sold_status;
+	}
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
+	public void setSold_status(int sold_status) {
+		this.sold_status = sold_status;
+	}
 
-    public int getBuyerId() {
-        return buyerId;
-    }
+	public String getCategory() {
+		return category;
+	}
 
-    public void setBuyerId(int buyerId) {
-        this.buyerId = buyerId;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public int getSeller_id() {
+		return seller_id;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public void setSeller_id(int seller_id) {
+		this.seller_id = seller_id;
+	}
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 	public int getItemId() {
 		// TODO Auto-generated method stub
@@ -106,5 +110,30 @@ public class ItemDTO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public int getSellerId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	public void setSellerId(int userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "ItemDTO [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", description="
+				+ description + ", sold_status=" + sold_status + ", category=" + category + ", seller_id=" + seller_id
+				+ "]";
+	}
+	
+	
+	
+	
 }
 

@@ -52,6 +52,15 @@ public class DisputeDTO {
     public void setStatus(DisputeStatus status) {
         this.status = status;
     }
+
+	@Override
+	public String toString() {
+		return "DisputeDTO [disputeId=" + disputeId + ", transactionId=" + transactionId + ", buyerId=" + buyerId
+				+ ", sellerId=" + sellerId + ", description=" + description + ", status=" + status + "]";
+	}
+    
+    
+    
 }
 
 

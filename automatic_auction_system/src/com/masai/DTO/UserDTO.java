@@ -69,5 +69,13 @@ public class UserDTO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDTO [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
+				+ "]";
+	}
+	
+	
 }
 

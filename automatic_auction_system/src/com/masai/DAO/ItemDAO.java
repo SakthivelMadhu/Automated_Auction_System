@@ -17,5 +17,7 @@ public interface ItemDAO {
     public List<ItemDTO> getItemsBySellerId(int sellerId) throws SQLException;
     public List<ItemDTO> getItemsByBuyerId(int buyerId) throws SQLException;
 	public List<ItemDTO> getAllItems();
+	public List<ItemDAO> getItemsBySoldStatus(int soldStatus);
+	public List<ItemDAO> getItemsByKeyword(String keyword);
 }
 

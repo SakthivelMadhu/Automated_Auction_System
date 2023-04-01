@@ -21,11 +21,11 @@ public abstract class UserDAOImpl implements UserDAO {
     public void addUser(UserDTO user) throws SQLException, DuplicateUsernameException {
         PreparedStatement pstmt = null;
         try {
-            pstmt = conn.prepareStatement("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getEmail());
-            pstmt.setString(4, user.getRole().toString());
+//            pstmt.setString(4, user.getRole().toString());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             if (e.getSQLState().equals("23505")) { // Unique constraint violation
@@ -44,11 +44,11 @@ public abstract class UserDAOImpl implements UserDAO {
     public void updateUser(UserDTO user) throws SQLException, InvalidDataEntryException {
         PreparedStatement pstmt = null;
         try {
-            pstmt = conn.prepareStatement("UPDATE users SET username = ?, password = ?, email = ?, role = ? WHERE id = ?");
+            pstmt = conn.prepareStatement("UPDATE users SET username = ?, password = ?, email = ? WHERE id = ?");
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getEmail());
-            pstmt.setString(4, user.getRole().toString());
+//            pstmt.setString(4, user.getRole().toString());
             pstmt.setInt(5, user.getUserId());
             int updatedRows = pstmt.executeUpdate();
             if (updatedRows == 0) {

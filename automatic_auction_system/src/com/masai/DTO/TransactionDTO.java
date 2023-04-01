@@ -87,5 +87,16 @@ public class TransactionDTO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "TransactionDTO [transactionId=" + transactionId + ", itemId=" + itemId + ", sellerId=" + sellerId
+				+ ", buyerId=" + buyerId + ", transactionDate=" + transactionDate + ", transactionAmount="
+				+ transactionAmount + "]";
+	}
+	
+	
+	
+	
 }
 
