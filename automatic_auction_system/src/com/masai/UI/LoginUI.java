@@ -2,7 +2,6 @@ package com.masai.UI;
 
 
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.masai.DAO.DisputeDAO;
@@ -11,7 +10,6 @@ import com.masai.DAO.ItemDAO;
 import com.masai.DAO.TransactionDAO;
 import com.masai.DAO.UserDAO;
 import com.masai.DTO.UserDTO;
-import com.masai.Exception.DuplicateUsernameException;
 
 public class LoginUI {
     
@@ -96,14 +94,8 @@ public class LoginUI {
         
         UserDTO user = new UserDTO(fullName, username, password, email, phoneNumber, UserRole.codePointCount(0, 0));
         
-        try {
-            UserDAO.addUser(user);
-            System.out.println("User registered successfully!");
-        } catch (DuplicateUsernameException e) {
-            System.out.println("Username already exists. Please try again.");
-        } catch (SQLException e) {
-            System.out.println("An error occurred. Please try again.");
-        }
+        UserDAO.addUser(user);
+		System.out.println("User registered successfully!");
     }
 
 	public String promptForUsername(Scanner scanner) {

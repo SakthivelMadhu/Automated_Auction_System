@@ -134,7 +134,7 @@ public class AdminUI {
         try {
             System.out.print("Enter the new GST rate: ");
             double newGstRate = scanner.nextDouble();
-            GSTDTO gst = new GSTDTO(0, newGstRate);
+            GSTDTO gst = new GSTDTO(0, null, newGstRate);
             GSTDAO.updateGST(gst);
             System.out.println("GST rate has been updated to " + newGstRate + "%");
         } catch (InputMismatchException e) {

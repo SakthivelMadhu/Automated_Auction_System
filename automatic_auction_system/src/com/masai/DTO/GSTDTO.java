@@ -3,11 +3,15 @@ package com.masai.DTO;
 
 public class GSTDTO {
     private int id;
+    private String category;
     private double rate;
     
-    public GSTDTO(int id, double rate) {
-        this.id = id;
-        this.rate = rate;
+    
+    public GSTDTO(int id, String category, double rate) {
+    	super();
+    	this.id = id;
+    	this.category = category;
+    	this.rate = rate;
     }
     
     public GSTDTO(String string, float float1) {
@@ -15,25 +19,37 @@ public class GSTDTO {
 	}
 
 	public int getId() {
-        return id;
-    }
-    
-    public double getRate() {
-        return rate;
-    }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getCategory() {
-		// TODO Auto-generated method stub
-		return null;
+		return category;
 	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	@Override
+	public String toString() {
+		return "GSTDTO [id=" + id + ", category=" + category + ", rate=" + rate + "]";
+	}
+
+
+	
+	
 }
 
 

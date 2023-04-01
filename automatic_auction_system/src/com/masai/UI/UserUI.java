@@ -1,6 +1,7 @@
 package com.masai.UI;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -122,7 +123,7 @@ public class UserUI {
 				}
 
 				@Override
-				public List<TransactionDTO> getAllTransactions() {
+				public List<TransactionDAO> getAllTransactions() {
 					// TODO Auto-generated method stub
 					return null;
 				}
@@ -131,6 +132,12 @@ public class UserUI {
 				public int login(String username, String password) {
 					// TODO Auto-generated method stub
 					return 0;
+				}
+
+				@Override
+				public List<TransactionDAO> getTransactionsInRange(LocalDate startDate, LocalDate endDate) {
+					// TODO Auto-generated method stub
+					return null;
 				}
 			};
             userDAO.updateUser(user);

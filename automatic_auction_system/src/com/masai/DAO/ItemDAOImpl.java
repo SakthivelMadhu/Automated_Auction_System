@@ -97,7 +97,7 @@ public abstract class ItemDAOImpl implements ItemDAO {
                             rs.getInt("seller_id"),
                             rs.getInt("buyer_id")
                     );
-                    items.add(item);
+                    items.add((ItemDTO) item);
                 }
             }
         }
@@ -207,29 +207,6 @@ public abstract class ItemDAOImpl implements ItemDAO {
 	    return items;
     }
 
-//	@Override
-//	public boolean addItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-
-//	@Override
-//	public boolean updateItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean addItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
-//
-//	@Override
-//	public boolean updateItem(ItemDTO itemDTO) throws DAO.InvalidDataEntryException {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
 
 	public ResultSet getResultSet() {
 		return resultSet;
