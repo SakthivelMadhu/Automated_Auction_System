@@ -18,19 +18,20 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
+import com.masai.DAO.DBUtils;
 
 import java.lang.System;
 
 public class Main {
     public static void main(String[] args) {
         // Load database credentials from properties file
-        Properties props = new Properties();
-        try {
-            props.load(new FileInputStream("src/database.properties"));
-        } catch (IOException e) {
-            System.out.println("Error loading database properties: " + e.getMessage());
-            return;
-        }
+//        Properties props = new Properties();
+//        try {
+//            props.load(new FileInputStream("src/database.properties"));
+//        } catch (IOException e) {
+//            System.out.println("Error loading database properties: " + e.getMessage());
+//            return;
+//        }
         
 
         // Initialize the UI object
