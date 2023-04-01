@@ -5,4 +5,4 @@ Project Details : [Automated Auction System.pdf](https://github.com/SakthivelMad
 
 My Project logo : <br>
 
- ![company_logo](https://user-images.githubusercontent.com/62326876/229209556-08fb3114-6b9e-426f-b22f-e95e16472785.gif)
+<img width="100px" height="100px" src="https://user-images.githubusercontent.com/62326876/229209556-08fb3114-6b9e-426f-b22f-e95e16472785.gif" />
