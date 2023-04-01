@@ -9,5 +9,6 @@ My Project logo : <br>
 
 Automated Auction System dbdiagram struture : 
 
-![Auction](https://user-images.githubusercontent.com/62326876/229303577-e2e32ee9-0ee8-4abe-b48b-f2110c6558b3.png)
+![auction_automated](https://user-images.githubusercontent.com/62326876/229310481-4bf3940b-5b94-4fb1-8de0-0b29a6f6e13a.png)
+
 
