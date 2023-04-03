@@ -1,5 +1,6 @@
 package com.masai.UI;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -136,6 +137,54 @@ public class UserUI {
 
 				@Override
 				public List<TransactionDAO> getTransactionsInRange(LocalDate startDate, LocalDate endDate) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public UserDTO getUserById(String email) throws SQLException {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Object getPassword() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Object getRole() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public String getbFirstName() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public Object getbLastName() {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public String resetUsernameByuser(String firstname, String username, Date dob, String mobileNumber) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public String resetPasswordByuser(String username, String password) {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+				@Override
+				public UserDTO getUserById(UserDAO user2) throws SQLException {
 					// TODO Auto-generated method stub
 					return null;
 				}

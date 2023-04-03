@@ -53,11 +53,11 @@ public class DisputeDTO {
         this.status = status;
     }
 
-	@Override
-	public String toString() {
-		return "DisputeDTO [disputeId=" + disputeId + ", transactionId=" + transactionId + ", buyerId=" + buyerId
-				+ ", sellerId=" + sellerId + ", description=" + description + ", status=" + status + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "DisputeDTO [disputeId=" + disputeId + ", transactionId=" + transactionId + ", buyerId=" + buyerId
+//				+ ", sellerId=" + sellerId + ", description=" + description + ", status=" + status + "]";
+//	}
     
     
     

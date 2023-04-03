@@ -13,5 +13,5 @@ public interface DisputeDAO {
     DisputeDTO getDisputeById(int disputeId) throws SQLException;
     List<DisputeDTO> getAllDisputes() throws SQLException;
 	String nextLine();
+	int getSid();
 }
-
