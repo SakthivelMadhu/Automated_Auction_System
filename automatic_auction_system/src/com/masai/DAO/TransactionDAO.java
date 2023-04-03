@@ -1,5 +1,6 @@
 package com.masai.DAO;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface TransactionDAO {
     public TransactionDTO getTransactionById(int transactionId) throws SQLException;
     public List<TransactionDTO> getTransactionsByBuyerId(int buyerId) throws SQLException;
     public List<TransactionDTO> getTransactionsBySellerId(int sellerId) throws SQLException;
+	public List<TransactionDAO> getTransactionsByDateRange(Date startDate, Date endDate);
+	public List<TransactionDAO> getAllTransactions();
 }
 

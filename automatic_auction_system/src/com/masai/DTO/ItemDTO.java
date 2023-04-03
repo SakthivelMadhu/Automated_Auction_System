@@ -125,13 +125,13 @@ public class ItemDTO {
 
 
 
-	@Override
-	public String toString() {
-		return "ItemDTO [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", description="
-				+ description + ", sold_status=" + sold_status + ", category=" + category + ", seller_id=" + seller_id
-				+ "]";
-	}
-	
+//	@Override
+//	public String toString() {
+//		return "ItemDTO [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", description="
+//				+ description + ", sold_status=" + sold_status + ", category=" + category + ", seller_id=" + seller_id
+//				+ "]";
+//	}
+//	
 	
 	
 	

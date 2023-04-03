@@ -18,6 +18,8 @@ public abstract class UserDAOImpl implements UserDAO {
         this.conn = conn;
     }
 
+    
+    
     public void addUser(UserDTO user) throws SQLException, DuplicateUsernameException {
         PreparedStatement pstmt = null;
         try {
@@ -75,7 +77,6 @@ public abstract class UserDAOImpl implements UserDAO {
         }
     }
 
-    @Override
     public UserDTO getUserById(int userId) throws SQLException {
         String query = "SELECT * FROM users WHERE user_id = ?";
         PreparedStatement stmt = conn.prepareStatement(query);

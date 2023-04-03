@@ -42,10 +42,10 @@ public class GSTDTO {
 		this.rate = rate;
 	}
 
-	@Override
-	public String toString() {
-		return "GSTDTO [id=" + id + ", category=" + category + ", rate=" + rate + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "GSTDTO [id=" + id + ", category=" + category + ", rate=" + rate + "]";
+//	}
 
 
 	

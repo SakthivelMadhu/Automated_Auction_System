@@ -19,5 +19,12 @@ public interface ItemDAO {
 	public List<ItemDTO> getAllItems();
 	public List<ItemDAO> getItemsBySoldStatus(int soldStatus);
 	public List<ItemDAO> getItemsByKeyword(String keyword);
+	public List<ItemDAO> getItemsByCategorySoldAndKeyword(String category, boolean sold, String keyword);
+	public void setCid(int category);
+	public void setSellingPrice(int nextInt);
+	public void setItem_detail(String nextLine);
+	public void setItem_quantity(int nextInt);
+	public void setAuctionAddress(String nextLine);
+	public void setDays(int nextInt);
 }
 
