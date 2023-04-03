@@ -15,20 +15,30 @@ Automated Auction System dbdiagram struture :
 ![auction_automated](https://user-images.githubusercontent.com/62326876/229310481-4bf3940b-5b94-4fb1-8de0-0b29a6f6e13a.png)
 
 
-Installation " <br>
-copy this https://github.com/SakthivelMadhu/brief-shirt-7318 <br>
-Select path where you want to store the project in your pc <br>
-open the corresponding file / folder with editor <br>
-open terminal of your editor <br>
-use --> git clone (paste link) <-- <br>
-after project cloned to your folder <br>
-go to "Main.java" inside "app" folder <br>
-run as java application <br>
+Installation : <br>
+*    copy this https://github.com/SakthivelMadhu/brief-shirt-7318 <br>
+*    Select path where you want to store the project in your pc <br>
+*    open the corresponding file / folder with editor <br>
+*    open terminal of your editor <br>
+*    use --> git clone (paste link) <-- <br>
+*    after project cloned to your folder <br>
+*    go to "Main.java" inside "app" folder <br>
+*    run as java application <br>
+
+
 Tech Stack : <br>
-Java <br>
-JDBC <br>
-SQL <br>
-DAO <br>
-Tools <br>
-Spring Tool Suite <br>
-Mysql (RDBMS) <br>
+*    Java <br>
+*    JDBC <br>
+*    SQL <br>
+*    DAO <br>
+    
+    
+   
+Tools :  <br>
+*    Spring Tool Suite <br>
+*    Mysql (RDBMS) <br>
+
+
+Flowchart : <br>
+
+![208626781-1f58135c-2163-4bef-a0ae-66c16f59f6fc](https://user-images.githubusercontent.com/62326876/229425496-456b1267-a6f5-4e85-8e6e-ffbb8782cb83.jpeg)
