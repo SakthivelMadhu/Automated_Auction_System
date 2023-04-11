@@ -1,14 +1,16 @@
 package com.masai.Exception;
 
-public class ItemException extends Exception {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+public class ItemException extends Exception{
+	String message;
 
 	public ItemException(String message) {
-        super(message);
-    }
-}
+		super(message);
+	}
 
+	public ItemException() {
+		super();
+	}
+	
+}
