@@ -12,7 +12,8 @@ My Project logo : <br>
 
 Automated Auction System dbdiagram struture : 
 
-![auction_automated](https://user-images.githubusercontent.com/62326876/229310481-4bf3940b-5b94-4fb1-8de0-0b29a6f6e13a.png)
+![Screenshot 2023-04-11 234354](https://user-images.githubusercontent.com/62326876/231253126-c8124109-0f45-4624-86f2-85ef3457061b.png)
+
 
 
 Installation : <br>
@@ -25,6 +26,27 @@ Installation : <br>
 *    go to "Main.java" inside "app" folder <br>
 *    run as java application <br>
 
+
+Features: <br>
+
+    Administrator roles:-
+
+*    View buyer list
+*    View seller list
+*    View daily selling report
+*    View dispute reports
+*    Seller roles:-
+
+    Add items:-
+*    Delete items
+*    Update items
+*    Selling report
+*    Items report
+*    Buyer roles:-
+
+    Select Items to buy:-
+*    See other buyer choices
+*    buy item
 
 Tech Stack : <br>
 *    Java <br>
