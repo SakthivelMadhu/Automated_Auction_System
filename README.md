@@ -36,16 +36,18 @@ Features: <br>
 *    View seller list
 *    View daily selling report
 *    View dispute reports
-*    Seller roles:-
 
-    Add items:-
+    Seller roles:-
+
+*    Add items
 *    Delete items
 *    Update items
 *    Selling report
 *    Items report
-*    Buyer roles:-
 
-    Select Items to buy:-
+    Buyer roles:-
+
+*    Select Items to buy
 *    See other buyer choices
 *    buy item
 
