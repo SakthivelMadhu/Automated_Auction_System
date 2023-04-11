@@ -1,15 +1,16 @@
 package com.masai.Exception;
 
-public class AdministratorException extends Exception {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class AdministratorException extends Exception{
+	String message;
 
+	public AdministratorException() {
+		super();
+	}
+	
 	public AdministratorException(String message) {
-        super(message);
-    }
-
+		super(message);
+		
+	}
 }
 
